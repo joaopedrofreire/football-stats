@@ -1,0 +1,205 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    background: #F4F4F4;
+    margin: 0;
+    color: #141414;
+}
+.col-1 {width: 8.33% !important;}
+.col-2 {width: 16.66% !important;}
+.col-3 {width: 25% !important;}
+.col-4 {width: 33.33% !important;}
+.col-5 {width: 41.66% !important;}
+.col-6 {width: 50% !important;}
+.col-7 {width: 58.33% !important;}
+.col-8 {width: 66.66% !important;}
+.col-9 {width: 75% !important;}
+.col-10 {width: 83.33% !important;}
+.col-11 {width: 91.66% !important;}
+.col-12 {width: 100% !important;}
+[class*="col-"] {
+    padding: 1rem;
+}
+.header {
+    text-align: center;
+    padding: 1.5rem 0;
+    background: #141414;
+    color: white;
+}
+.header h1 {
+    font-weight: 500;
+}
+h1 span {
+    background: rgb(0,134,255);
+    background: linear-gradient(328deg, rgba(0,134,255,1) 0%, rgba(61,205,255,1) 100%);   
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+.content {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+.card {
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #DBDBDB;
+}
+.card h2 {
+    margin-top: 0
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #DBDBDB;
+
+}
+.standings td:nth-child(1) {
+    color: #ACACAC;
+    width: 0.5rem;
+    padding: 1rem 0;
+    font-size: 20px;
+}
+.standings td:nth-child(2) img {
+    width: 40px;
+}
+.standings td:nth-child(3) {
+    text-align: left;
+    font-weight: 500;
+    padding-right: 2rem;
+    padding-left: 0
+}
+.standings td:last-child {
+    width: 4.5rem;
+}
+.standings td:last-child span {
+    display: flex;
+    justify-content: space-between;
+}
+.standings td:last-child div {
+    width: 10px;
+    height: 10px;
+    background: #BABABA;
+    border-radius: 5px;
+}
+.standings th:nth-child(1) {
+    text-align: left;
+}
+.standings th {
+    font-weight: 300;
+    color: #929292;
+    font-size: 0.9rem;
+}
+.matches td:nth-child(6) {
+    text-align: right;
+    font-weight: 500;
+    padding-right: 0;
+}
+.matches td:nth-child(2) {
+    font-weight: 500;
+    text-align: left;
+    padding-left: 0;
+}
+.matches td:nth-child(4) {
+    width: 1rem;
+    color: gray;
+    font-size: 1.5rem;
+}
+.matches td:nth-child(3), .matches td:nth-child(5) {
+    font-weight: 500;
+    font-size: 2rem;
+    width: 2rem;
+}
+.matches td img {
+    width: 40px;
+}
+.simulator {
+    text-align: center;
+}
+.simulator p,
+.simulator h2 {
+    text-align: left;
+}
+.simulator select {
+    appearance: none;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    width: calc(50% - 2rem);
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    padding: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #F4F4F4;
+    text-align: center;
+    outline: none;
+}
+.simulator select:hover {
+    background: #E0E0E0;
+}
+.simulator span {
+    display: inline-block;
+    margin: 0 0.5rem;
+    width: 2rem;
+    color: gray;
+    font-size: 1.5rem;
+}
+.simulator button {
+    background: #0F80FF;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    font-size: 17px;
+    font-weight: 300;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s;
+    outline: none;
+}
+.simulator button:hover {
+    background: #0B5EBB;
+}
+.leagues {
+    width: 80%;
+    margin: auto;
+}
+.leagues .col {
+    width: 25%;
+}
+.leagues .card {
+    box-sizing: border-box;
+    width: calc(100% - 2rem);
+    height: 15rem;
+    margin: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.leagues .bra {
+    width: calc(80% - 2rem);
+    margin-bottom: 0.5rem;
+}
+.leagues .ale,
+.leagues .fra {
+    width: calc(70% - 2rem);
+}
+.leagues .ita {
+    width: calc(50% - 2rem);
+}
+.leagues .por,
+.leagues .en,
+.leagues .esp,
+.leagues .hol {
+    width: calc(100% - 2rem);
+}

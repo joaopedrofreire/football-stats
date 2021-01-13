@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>{{teams.competition.name}}</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+  </head>
+
+  <body>      <div class="header">
+        <h1>{{teams.competition.area.name}} <span>{{teams.competition.name}}</span></h1>
+      </div>
+    <div class="content">
+      <div class="col-6">
+      <div class="standings card">
+        <h2>TABELA</h2>
+      <table>
+      <thead>
+        <th colspan="3">
+          CLASSIFICAÇÃO
+        </th>
+        <th>P</th>
+        <th>J</th>
+        <th>V</th>
+        <th>E</th>
+        <th>D</th>
+        <th>GP</th>
+        <th>GC</th>
+        <th>SG</th>
+        <th>ÚLT. JOGOS</th>
+      </thead>
+      <tbody>
+      {% for item in table.0.table %}
+      <tr>
+        <td>{{ item.position }}</td>
+        <td><img src="{{ item.team.crestUrl }}" /></td>
+        <td>
+          {% for team in teams %}
+          {% if team.id == item.team.id %}
+          {{ team.shortName }}
+          {% endif %}
+          {% endfor%}
+        </td>
+        <td>{{ item.points }}</td>
+        <td>{{ item.playedGames }}</td>
+        <td>{{ item.won }}</td>
+        <td>{{ item.draw }}</td>
+        <td>{{ item.lost }}</td>
+        <td>{{ item.goalsFor }}</td>
+        <td>{{ item.goalsAgainst }}</td>
+        <td>{{ item.goalDifference }}</td>
+        <td>
+          <span>
+          <div style="background: {% if item.form.0 == 'W'%}limegreen{% elif item.form.0 == 'L' %}red{%endif%}"></div>
+          <div style="background: {% if item.form.2 == 'W'%}limegreen{% elif item.form.2 == 'L' %}red{%endif%}"></div>
+          <div style="background: {% if item.form.4 == 'W'%}limegreen{% elif item.form.4 == 'L' %}red{%endif%}"></div>
+          <div style="background: {% if item.form.6 == 'W'%}limegreen{% elif item.form.6 == 'L' %}red{%endif%}"></div>
+          <div style="background: {% if item.form.8 == 'W'%}limegreen{% elif item.form.8 == 'L' %}red{%endif%}"></div>
+          </span>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+      </table>
+    </div>
+    </div>
+    <div class="col-6">
+      <div class="matches card">
+        <h2>RODADA ATUAL</h2>
+      <table>
+      <thead>
+      </thead>
+      <tbody>
+      {% for item in matches %}
+      {% if item.matchday == item.season.currentMatchday %}
+      <tr>
+        <td>
+          {% for team in teams.teams %}
+          {% if team.id == item.homeTeam.id %}
+          <img src="{{ team.crestUrl }}" />
+          {% endif %}
+          {% endfor%}
+        </td>
+        <td>
+          {% for team in teams.teams %}
+          {% if team.id == item.homeTeam.id %}
+          {{ team.shortName }}
+          {% endif %}
+          {% endfor%}
+        </td>
+        <td>
+          {% if item.status == 'FINISHED' %}{{ item.score.fullTime.homeTeam }}
+          {% else %}{% endif %}
+        </td>
+        <td>{% if item.status == 'FINISHED' %}X
+          {% else %}{% endif %}</td>
+        <td>
+          {% if item.status == 'FINISHED' %}{{ item.score.fullTime.awayTeam }}
+          {% else %}{% endif %}
+        </td>
+        <td>
+          {% for team in teams.teams %}
+          {% if team.id == item.awayTeam.id %}
+          {{ team.shortName }}
+          {% endif %}
+          {% endfor%}
+        </td>
+        <td>
+          {% for team in teams.teams %}
+          {% if team.id == item.awayTeam.id %}
+          <img src="{{ team.crestUrl }}" />
+          {% endif %}
+          {% endfor%}
+        </td>
+        <td>
+          {{item.utcDate|slice:"8:10"}}/{{item.utcDate|slice:"5:7"}}/{{item.utcDate|slice:"0:4"}}
+        </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      </tbody>
+      </table>
+      </div>
+      <div class="card simulator" style="margin-top: 2rem;">
+        <h2>SIMULAR</h2>
+        <p>Escolha dois times para prever o resultado da partida</p>
+        <select>
+          <option disabled selected>Casa</option>
+          {% for team in teams.teams %}
+          <option>{{ team.shortName }}</option>
+          {% endfor %}
+        </select>
+        <span>X</span>
+        <select>
+          <option disabled selected>Visitante</option>
+          {% for team in teams.teams %}
+          <option>{{ team.shortName }}</option>
+          {% endfor %}
+        </select>
+        <button>SIMULAR</button>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
