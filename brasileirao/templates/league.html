@@ -38,7 +38,7 @@
         <td>{{ item.position }}</td>
         <td><img src="{{ item.team.crestUrl }}" /></td>
         <td>
-          {% for team in teams %}
+          {% for team in teams.teams %}
           {% if team.id == item.team.id %}
           {{ team.shortName }}
           {% endif %}
@@ -124,7 +124,7 @@
       </tbody>
       </table>
       </div>
-      <div class="card simulator" style="margin-top: 2rem;">
+      <div class="card simulator" style="margin-top: 4rem;">
         <h2>SIMULAR</h2>
         <p>Escolha dois times para prever o resultado da partida</p>
         <select>

@@ -1,7 +1,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
-    background: #F4F4F4;
+    background: white;
     margin: 0;
     color: #141414;
 }
@@ -18,16 +18,15 @@ body {
 .col-11 {width: 91.66% !important;}
 .col-12 {width: 100% !important;}
 [class*="col-"] {
-    padding: 1rem;
+    padding: 2rem;
 }
 .header {
     text-align: center;
-    padding: 1.5rem 0;
-    background: #141414;
-    color: white;
+    padding: 1.5rem 0 0;
 }
 .header h1 {
     font-weight: 500;
+    margin-bottom: 0
 }
 h1 span {
     background: rgb(0,134,255);
@@ -39,13 +38,25 @@ h1 span {
 .content {
     display: flex;
     justify-content: center;
-    padding: 1rem;
+    padding: 2rem;
 }
 .card {
     padding: 2rem;
     background: white;
-    border-radius: 10px;
-    border: 1px solid #DBDBDB;
+    border-radius: 30px;
+    -webkit-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.4);
+    -moz-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.4);
+    box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.4);
+    transition: all 0.4s;
+}
+.card.link {
+    cursor: pointer;
+}
+.card.link:hover {
+    -webkit-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.7);
+-moz-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.7);
+box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.7);
+transform: scale(1.1,1.1);
 }
 .card h2 {
     margin-top: 0
@@ -73,7 +84,12 @@ table td {
     text-align: left;
     font-weight: 500;
     padding-right: 2rem;
-    padding-left: 0
+    padding-left: 0;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.standings td:nth-child(3):hover {
+    color: #0F80FF;
 }
 .standings td:last-child {
     width: 4.5rem;
@@ -118,6 +134,13 @@ table td {
 }
 .matches td img {
     width: 40px;
+}
+.matches tr {
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.matches tr:hover {
+    color: #0F80FF;
 }
 .simulator {
     text-align: center;
