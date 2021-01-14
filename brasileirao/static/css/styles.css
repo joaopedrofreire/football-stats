@@ -4,6 +4,7 @@ body {
     background: white;
     margin: 0;
     color: #141414;
+    box-sizing: border-box;
 }
 .col-1 {width: 8.33% !important;}
 .col-2 {width: 16.66% !important;}
@@ -70,6 +71,9 @@ table td {
     text-align: center;
     border-bottom: 1px solid #DBDBDB;
 
+}
+.standings, .matches {
+    overflow: auto;
 }
 .standings td:nth-child(1) {
     color: #ACACAC;
@@ -225,4 +229,14 @@ table td {
 .leagues .esp,
 .leagues .hol {
     width: calc(100% - 2rem);
+}
+
+
+@media (max-width: 1300px) {
+[class*="col-"] {
+    width: calc(100% - 4rem) !important;
+}
+.content {
+    display: block;
+}
 }
