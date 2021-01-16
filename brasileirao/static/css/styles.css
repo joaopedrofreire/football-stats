@@ -1,10 +1,14 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
-    background: white;
+    background: rgb(228,228,235);
     margin: 0;
     color: #141414;
     box-sizing: border-box;
+    font-size: 15px;
+}
+div {
+box-sizing: border-box;
 }
 .col-1 {width: 8.33% !important;}
 .col-2 {width: 16.66% !important;}
@@ -22,12 +26,36 @@ body {
     padding: 2rem;
 }
 .header {
-    text-align: center;
-    padding: 1.5rem 0 0;
+    background: rgb(37,39,51);
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
 }
-.header h1 {
-    font-weight: 500;
-    margin-bottom: 0
+.header .brand {
+    width: 10rem;
+}
+.header .title {
+    text-align: center;
+    width: 20rem;
+    font-size: 18px;
+    vertical-align: middle;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.header .login {
+    width: 10rem;
+    color: transparent;
+}
+.header h2 {
+    font-size: 22px;
+    margin: 0;
+}
+.header h2 span {
+     background: rgb(5,255,40);
+background: linear-gradient(337deg, rgba(5,255,40,1) 0%, rgba(0,255,211,1) 100%); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 h1 span {
     background: rgb(0,134,255);
@@ -42,13 +70,18 @@ h1 span {
     padding: 2rem;
 }
 .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(26,54,126,0.125);
+    border-radius: .25rem;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03),0 0.9375rem 1.40625rem rgba(4,9,20,0.03),0 0.25rem 0.53125rem rgba(4,9,20,0.05),0 0.125rem 0.1875rem rgba(4,9,20,0.03);
+    border-width: 0;
+    transition: all .2s;
     padding: 2rem;
-    background: white;
-    border-radius: 30px;
-    -webkit-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.4);
-    -moz-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.4);
-    box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.4);
-    transition: all 0.4s;
 }
 .card.link {
     cursor: pointer;
@@ -72,8 +105,8 @@ table td {
     border-bottom: 1px solid #DBDBDB;
 
 }
-.standings, .matches {
-    overflow: auto;
+.standings .table {
+    overflow-x: auto;
 }
 .standings td:nth-child(1) {
     color: #ACACAC;
@@ -107,6 +140,7 @@ table td {
     height: 10px;
     background: #BABABA;
     border-radius: 5px;
+    margin: 3px;
 }
 .standings th:nth-child(1) {
     text-align: left;
@@ -127,14 +161,20 @@ table td {
     padding-left: 0;
 }
 .matches td:nth-child(4) {
-    width: 1rem;
     color: gray;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 .matches td:nth-child(3), .matches td:nth-child(5) {
     font-weight: 500;
-    font-size: 2rem;
-    width: 2rem;
+    font-size: 1.6rem;
+    width: 1rem;
+}
+.matches td:nth-child(3) {
+    padding-right: 0;
+}
+
+.matches td:nth-child(5) {
+    padding-left: 0;
 }
 .matches td img {
     width: 40px;
@@ -148,6 +188,7 @@ table td {
 }
 .simulator {
     text-align: center;
+    margin-top: 4rem;
 }
 .simulator p,
 .simulator h2 {
@@ -163,7 +204,7 @@ table td {
     font-family: 'Open Sans', sans-serif;
     font-size: 25px;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: .25rem;
     cursor: pointer;
     transition: all 0.2s;
     background: #F4F4F4;
@@ -183,7 +224,7 @@ table td {
 .simulator button {
     background: #0F80FF;
     border: none;
-    border-radius: 5px;
+    border-radius: .25rem;
     padding: 0.5rem 1.5rem;
     color: white;
     font-size: 17px;
@@ -232,11 +273,56 @@ table td {
 }
 
 
-@media (max-width: 1300px) {
+
+
+
+
+
+@media (max-width: 1450px) {
+.matches td:last-child {
+    display: none;
+}
 [class*="col-"] {
-    width: calc(100% - 4rem) !important;
+    padding: 1rem;
+}
+.content {
+    padding: 1rem;
+}
+.simulator {
+    margin-top: 2rem;
+}
+@media (max-width: 800px) {
+[class*="col-"] {
+    width: 100% !important;
 }
 .content {
     display: block;
+}
+}
+@media (max-width: 500px) {
+.header {
+    display: block;
+}
+.title {
+    width: 100% !important;
+    margin-top: 1rem;
+}
+.login {
+    display: none;
+}
+.matches td:nth-child(2) {
+    display: none;
+}
+.matches td:nth-child(6) {
+    display: none;
+}
+.content {
+    padding: 0;
+}
+.card {
+    margin: 0
+}
+[class*="col-"] {
+    padding: 0;
 }
 }

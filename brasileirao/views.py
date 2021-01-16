@@ -23,4 +23,8 @@ def index(request):
 	return render(request, 'index.html')
 
 def league(request,league_id):
-  return render(request, 'league.html', get_league_data(league_id))
+    context = get_league_data(league_id)
+    area = context['teams']['competition']['area']['name']
+    league_name = context['teams']['competition']['name']
+    context.update({'title': f'{area} {league_name}'})
+    return render(request, 'league.html', context)
