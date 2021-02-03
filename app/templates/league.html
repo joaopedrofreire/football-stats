@@ -4,7 +4,7 @@
     <!-- <h1>{{teams.competition.area.name}} <span>{{teams.competition.name}}</span></h1> -->
     <div class="content">
       <div class="col-6">
-      <div class="standings card">
+      <div class="standings card" style="margin-top: 0">
         <h2>TABELA</h2>
       <div class="table">
       <table>
@@ -23,25 +23,25 @@
         <th>ÚLT. JOGOS</th>
       </thead>
       <tbody>
-      {% for item in table.0.table %}
+      {% for item in table %}
       <tr>
         <td>{{ item.position }}</td>
-        <td><img src="{{ item.team.crestUrl }}" /></td>
+          {% for team in teams %}
+          {% if team.id == item.team_id %}
+        <td><img src="{{ team.crestUrl }}" /></td>
         <td>
-          {% for team in teams.teams %}
-          {% if team.id == item.team.id %}
           {{ team.shortName }}
           {% endif %}
           {% endfor%}
         </td>
         <td>{{ item.points }}</td>
-        <td>{{ item.playedGames }}</td>
+        <td>{{ item.played_games }}</td>
         <td>{{ item.won }}</td>
         <td>{{ item.draw }}</td>
         <td>{{ item.lost }}</td>
-        <td>{{ item.goalsFor }}</td>
-        <td>{{ item.goalsAgainst }}</td>
-        <td>{{ item.goalDifference }}</td>
+        <td>{{ item.goals_for }}</td>
+        <td>{{ item.goals_against }}</td>
+        <td>{{ item.goal_difference }}</td>
         <td>
           <span>
           <div style="background: {% if item.form.0 == 'W'%}limegreen{% elif item.form.0 == 'L' %}red{%endif%}"></div>
@@ -59,7 +59,7 @@
     </div>
     </div>
     <div class="col-6">
-      <div class="matches card">
+      <div class="matches card" style="margin-top: 0">
         <h2>RODADA ATUAL</h2>
       <table>
       <thead>
@@ -67,16 +67,16 @@
       <tbody>
       {% for item in matches %}
       {% if item.matchday == item.season.currentMatchday %}
-      <tr>
+      <tr onclick="window.location.href = '{{league.competition.id}}/{{item.homeTeam.id}}/{{item.awayTeam.id}}';">
         <td>
-          {% for team in teams.teams %}
+          {% for team in teams %}
           {% if team.id == item.homeTeam.id %}
           <img src="{{ team.crestUrl }}" />
           {% endif %}
           {% endfor%}
         </td>
         <td>
-          {% for team in teams.teams %}
+          {% for team in teams %}
           {% if team.id == item.homeTeam.id %}
           {{ team.shortName }}
           {% endif %}
@@ -93,14 +93,14 @@
           {% else %}{% endif %}
         </td>
         <td>
-          {% for team in teams.teams %}
+          {% for team in teams %}
           {% if team.id == item.awayTeam.id %}
           {{ team.shortName }}
           {% endif %}
           {% endfor%}
         </td>
         <td>
-          {% for team in teams.teams %}
+          {% for team in teams %}
           {% if team.id == item.awayTeam.id %}
           <img src="{{ team.crestUrl }}" />
           {% endif %}
@@ -118,23 +118,30 @@
       <div class="card simulator">
         <h2>SIMULAR</h2>
         <p>Escolha dois times para prever o resultado da partida</p>
-        <form>
-        <select>
+        <select id="home">
           <option disabled selected>Casa</option>
-          {% for team in teams.teams %}
-          <option>{{ team.shortName }}</option>
+          {% for team in teams %}
+          <option value="{{ team.id }}">{{ team.shortName }}</option>
           {% endfor %}
         </select>
         <span>X</span>
-        <select>
+        <select id="away">
           <option disabled selected>Visitante</option>
-          {% for team in teams.teams %}
-          <option>{{ team.shortName }}</option>
+          {% for team in teams %}
+          <option value="{{ team.id }}">{{ team.shortName }}</option>
           {% endfor %}
         </select>
-        <button>SIMULAR</button>
-        </form>
+        <button id="simulate">SIMULAR</button>
       </div>
     </div>
     </div>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+      $( "#simulate" ).click(function() {
+        var homeTeam = $( "#home option:selected" ).val();
+        var awayTeam = $( "#away option:selected" ).val();
+        window.location.href = '{{league.competition.id}}/'+homeTeam+'/'+awayTeam;
+      });
+    </script>
 {% endblock %}

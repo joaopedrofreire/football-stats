@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- <h1>{{teams.competition.area.name}} <span>{{teams.competition.name}}</span></h1> -->
+    <div class="content" style="max-width: 1200px; margin: auto; flex-wrap: wrap;">
+      <div class="col-12" style="">
+        <div class="score card" style="margin-top: 0">
+          <div style="width: 100%; text-align: center; margin-bottom: 1rem; text-transform: uppercase;">
+            RODADA {{match.matchday}} | {{home_team.venue}}
+          </div>
+          <div>{{home_team.shortName}}</div>
+          <div><img src="{{home_team.crestUrl}}"></div>
+          <div>
+          {% if score.homeTeam or score.homeTeam == 0 %}
+            {{score.homeTeam}}
+          {% else %}
+            <span style="color: #0F80FF">{{top_results.0.0.0}}</span>
+          {% endif %}
+          </div>
+          <div>X</div>
+          <div>
+          {% if score.awayTeam or score.awayTeam == 0 %}
+            {{score.awayTeam}}
+          {% else %}
+            <span style="color: #0F80FF">{{top_results.0.0.1}}</span>
+          {% endif %}</div>
+          <div><img src="{{away_team.crestUrl}}"></div>
+          <div>{{away_team.shortName}}</div>
+          <div style="width: 100%; text-align: center; margin-top: 1rem;">
+            {% if match.status == "SCHEDULED" %}<span class="badge">PLACAR MAIS PROVÁVEL</span>{% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card scores" style=" margin-top: 0">
+          <h2 style="margin-bottom: 0;">PLACARES</h2>
+          <h3>MAIS PROVÁVEIS</h3>
+          {% for item in top_results %}
+          <div>{{item.0.0}} x {{item.0.1}}</div>
+          {% endfor %}
+          <div class="pos">
+            <div>1°</div>
+            <div>2°</div>
+            <div>3°</div>
+            <div>4°</div>
+            <div>5°</div>
+          </div>
+          <div class="por">
+            {% for item in top_results %}
+            <div>{{item.1|floatformat:"1"}}%</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-6" style="">
+        <div class="card" style="margin-top: 0">
+          <h2>CHANCES</h2>
+          <div class="prob">
+            <div {% if chances.0 > chances.1 and chances.0 > chances.2 %}style="color: #0F80FF"{% endif %}>{{chances.0}}%</div>
+            <div {% if chances.1 > chances.0 and chances.1 > chances.2 %}style="color: #0F80FF"{% endif %}>{{chances.1}}%</div>
+            <div {% if chances.2 > chances.1 and chances.2 > chances.0 %}style="color: #0F80FF"{% endif %}>{{chances.2}}%</div>
+          </div>
+          <div class="prob2">
+            <div {% if chances.0 > chances.1 and chances.0 > chances.2 %}style="color: #0F80FF"{% endif %}>Vitória do<br>{{home_team.shortName}}</div>
+            <div {% if chances.1 > chances.0 and chances.1 > chances.2 %}style="color: #0F80FF"{% endif %}>Empate</div>
+            <div {% if chances.2 > chances.1 and chances.2 > chances.0 %}style="color: #0F80FF"{% endif %}>Vitória do<br>{{away_team.shortName}}</div>
+          </div>
+        </div>
+        <div class="card heatmap">
+          <div class="heatmap-content">
+            {% for line in heatmap %}
+            {% with counter=forloop.counter0 %}
+            {% for item in line %}
+            <div class="cell" style="background: rgba(15,128,255,calc({{item|stringformat:'f'}} / 11))"><span class="cell-txt">{{counter}} x {{ forloop.counter0 }} <br> <span style="font-weight: 600; font-size: 1.2rem">{{item|floatformat:"1"}}%</span></span></div>
+            {% endfor %}
+            {% endwith %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{results}}
+{% endblock %}

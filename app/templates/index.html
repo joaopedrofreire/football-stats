@@ -2,37 +2,30 @@
 {% load static %}
 {% block content %}
     <div class="content leagues">
-      <div class="col">
         <a href="{% url 'league' league_id='2013' %}"><div class="card link">
           <img class="bra" src="{% static 'img/bra.png' %}">
         </div></a>
-        <a href="{% url 'league' league_id='2015' %}"><div class="card link">
-          <img class="fra" src="{% static 'img/fra.png' %}">
-        </div></a>
-      </div>
-      <div class="col">
         <a href="{% url 'league' league_id='2021' %}"><div class="card link">
           <img class="en" src="{% static 'img/ing.png' %}">
+        </div></a>
+        <a href="{% url 'league' league_id='2014' %}"><div class="card link">
+          <img class="esp" src="{% static 'img/esp.png' %}">
+        </div></a>
+        <a href="{% url 'league' league_id='2002' %}"><div class="card link">
+          <img class="ale" src="{% static 'img/ale.png' %}">
+        </div></a>
+        
+        <a href="{% url 'league' league_id='2015' %}"><div class="card link">
+          <img class="fra" src="{% static 'img/fra.png' %}">
         </div></a>
         <a href="{% url 'league' league_id='2019' %}"><div class="card link">
           <img class="ita" src="{% static 'img/ita.png' %}">
         </div></a>
-      </div>
-      <div class="col">
-        <a href="{% url 'league' league_id='2014' %}"><div class="card link">
-          <img class="esp" src="{% static 'img/esp.png' %}">
-        </div></a>
         <a href="{% url 'league' league_id='2017' %}"><div class="card link">
           <img class="por" src="{% static 'img/por.png' %}">
-        </div></a>
-      </div>
-      <div class="col">
-        <a href="{% url 'league' league_id='2002' %}"><div class="card link">
-          <img class="ale" src="{% static 'img/ale.png' %}">
         </div></a>
         <a href="{% url 'league' league_id='2003' %}"><div class="card link">
           <img class="hol" src="{% static 'img/hol.png' %}">
         </div></a>
-      </div>
     </div>
 {% endblock %}

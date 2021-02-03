@@ -52,8 +52,8 @@ box-sizing: border-box;
     margin: 0;
 }
 .header h2 span {
-     background: rgb(5,255,40);
-background: linear-gradient(337deg, rgba(5,255,40,1) 0%, rgba(0,255,211,1) 100%); 
+    background: rgb(5,255,40);
+    background: linear-gradient(337deg, rgba(5,255,40,1) 0%, rgba(0,255,211,1) 100%); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -64,15 +64,20 @@ h1 span {
     -webkit-text-fill-color: transparent;
     font-weight: 700;
 }
+h3 {
+    margin-top: 0;
+    color: #4E4F4F;
+    font-weight: 500;
+    font-size: 17px;
+}
 .content {
     display: flex;
     justify-content: center;
     padding: 2rem;
 }
 .card {
+    margin-top: 4rem;
     position: relative;
-    display: flex;
-    flex-direction: column;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
@@ -188,7 +193,6 @@ table td {
 }
 .simulator {
     text-align: center;
-    margin-top: 4rem;
 }
 .simulator p,
 .simulator h2 {
@@ -241,18 +245,23 @@ table td {
 .leagues {
     width: 80%;
     margin: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
 }
-.leagues .col {
+.leagues a {
+    display: block;
     width: 25%;
+    min-width: 22rem;
 }
 .leagues .card {
     box-sizing: border-box;
-    width: calc(100% - 2rem);
+    width: 100%;
     height: 15rem;
-    margin: 2rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: calc(100% - 2rem);
 }
 .leagues .bra {
     width: calc(80% - 2rem);
@@ -273,6 +282,191 @@ table td {
 }
 
 
+/* match page */
+.score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.score div {
+    min-width: 3rem;
+    margin: 0 1rem;
+}
+.score div:nth-child(2) {
+    text-align: right;
+}
+.score div:nth-child(8) {
+    text-align: left;
+}
+.score div:nth-child(2),
+.score div:nth-child(8) {
+    font-size: 30px;
+    font-weight: 600;
+    width: 25%;
+}
+.score div:nth-child(3),
+.score div:nth-child(7) {
+    width: 5%;
+}
+.score div:nth-child(4) {
+    margin: 0 0 0 3rem;
+}
+.score div:nth-child(6) {
+    margin: 0 3rem 0 0;
+}
+.score div:nth-child(4),
+.score div:nth-child(6) {
+    text-align: center;
+    width: 5%;
+    font-size: 50px;
+    font-weight: 700;
+}
+.score div:nth-child(5) {
+    font-size: 20px;
+    font-weight: 500;
+    color: gray;
+    text-align: center;
+    margin: 0;
+    min-width: 1rem;
+}
+.score div img {
+    width: 100%;
+}
+.badge {
+    font-weight: 400;
+    font-size: 12px;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    color: white;
+    background: #0F80FF;
+}
+
+
+.scores div {
+    height: 3rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+.scores div:nth-child(3) {
+    color: #0F80FF;
+    font-weight: 600;
+    font-size: 40px;
+}
+.scores div:nth-child(4) {
+    font-weight: 600;
+    font-size: 30px;
+}
+.scores div:nth-child(5) {
+    font-weight: 500;
+    font-size: 30px;
+}
+.scores div:nth-child(6) {  
+    font-weight: 500;
+    font-size: 25px;
+}
+.scores {
+    position: relative;
+}
+.scores .pos {
+    position: absolute;
+    top: 6.5rem;
+    display: block;
+}
+.scores .pos div {
+    height: 3rem;
+    width: 2rem;
+    font-weight: 600;
+    color: gray;
+    font-size: 17px;
+    vertical-align: middle;
+}
+.scores .por {
+    position: absolute;
+    top: 6.5rem;
+    right: 2rem;
+    display: block;
+}
+.scores .por div {
+    height: 3rem;
+    width: 2rem;
+    font-weight: 600;
+    color: gray;
+    font-size: 17px;
+    vertical-align: middle;
+}
+.prob {
+    display: flex;
+    justify-content: space-around;
+}
+.prob div:nth-child(1) {
+    font-size: 40px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.prob div:nth-child(2) {
+    font-size: 30px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.prob div:nth-child(3) {
+    font-size: 40px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.prob2 {
+    font-weight: 400;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-around;
+    text-transform: uppercase;
+}
+.prob2 div {
+    text-align: center;
+}
+.heatmap {
+    padding-top: calc(100% - 2rem);
+    position: relative;
+}
+.heatmap-content {
+    transform: rotate(45deg) scale(0.78,0.78);
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    bottom: 2rem;
+    left: 2rem;
+    width: calc(100% - 4rem);
+    display: flex;
+    flex-wrap: wrap;
+}
+.cell {
+    width: calc(20% - 0.5rem);
+    height: calc(20% - 0.5rem);
+    margin: 0.25rem;
+    border-radius: 100%;
+    background: #0F80FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.cell .cell-txt {
+    display: block;
+    transform: rotate(-45deg);
+    font-size: 1.4rem;
+    line-height: 1.3rem;
+}
+
+
+
+
+
 
 
 
@@ -288,8 +482,11 @@ table td {
 .content {
     padding: 1rem;
 }
-.simulator {
+.card {
     margin-top: 2rem;
+}
+.leagues {
+    width: 100%;
 }
 @media (max-width: 1100px) {
 [class*="col-"] {
