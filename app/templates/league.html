@@ -87,7 +87,9 @@
           {% else %}{% endif %}
         </td>
         <td>{% if item.status == 'FINISHED' %}X
-          {% else %}{% endif %}</td>
+          {% else %}
+          <span class="match-btn">VER PREVISÕES</span>
+          {% endif %}</td>
         <td>
           {% if item.status == 'FINISHED' %}{{ item.score.fullTime.awayTeam }}
           {% else %}{% endif %}

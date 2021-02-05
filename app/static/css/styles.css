@@ -90,12 +90,13 @@ h3 {
 }
 .card.link {
     cursor: pointer;
+    margin-left: 1rem;
 }
 .card.link:hover {
     -webkit-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.7);
--moz-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.7);
-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.7);
-transform: scale(1.1,1.1);
+    -moz-box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.7);
+    box-shadow: 11px 11px 62px -19px rgba(0,0,0,0.7);
+    transform: scale(1.1,1.1);
 }
 .card h2 {
     margin-top: 0
@@ -191,6 +192,20 @@ table td {
 .matches tr:hover {
     color: #0F80FF;
 }
+.match-btn {
+    background: #E8E9ED;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-size: 12px;
+    transition: all 0.2s;
+    display: inline-block;
+    width: 5.5rem;
+}
+.matches tr:hover .match-btn {
+    background: #0F80FF;
+    color: white;
+    font-weight: 400;
+}
 .simulator {
     text-align: center;
 }
@@ -243,11 +258,12 @@ table td {
     background: #0B5EBB;
 }
 .leagues {
-    width: 80%;
+    width: 100%;
     margin: auto;
     flex-wrap: wrap;
     justify-content: center;
     padding: 0;
+    max-width: 1500px;
 }
 .leagues a {
     display: block;
