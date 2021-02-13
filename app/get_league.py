@@ -64,6 +64,26 @@ class League(object):
         df = pd.DataFrame(table[start-1:end], columns=columns)
         return df
 
+    def best_attack(self):
+        table = self.get_table().sort_values(by=["goals_for"], ascending=False).head(n=1).to_dict(orient='records')
+        team = Team(self, table[0]['team_id']).infos
+        return {'name': team['shortName'], 'goals': table[0]['goals_for'], 'url': team['crestUrl']} 
+
+    def worst_attack(self):
+        table = self.get_table().sort_values(by=["goals_for"], ascending=True).head(n=1).to_dict(orient='records')
+        team = Team(self, table[0]['team_id']).infos
+        return {'name': team['shortName'], 'goals': table[0]['goals_for'], 'url': team['crestUrl']}
+
+    def best_defense(self):
+        table = self.get_table().sort_values(by=["goals_against"], ascending=True).head(n=1).to_dict(orient='records')
+        team = Team(self, table[0]['team_id']).infos
+        return {'name': team['shortName'], 'goals': table[0]['goals_against'], 'url': team['crestUrl']} 
+
+    def worst_defense(self):
+        table = self.get_table().sort_values(by=["goals_against"], ascending=False).head(n=1).to_dict(orient='records')
+        team = Team(self, table[0]['team_id']).infos
+        return {'name': team['shortName'], 'goals': table[0]['goals_against'], 'url': team['crestUrl']}
+
 class Match:
     def __init__(self,league,home_team_id,away_team_id):
         for match in league.matches:

@@ -9,11 +9,16 @@ def league(request,league_id):
     table = league.get_table().to_dict(orient='records')
     teams = league.teams
     matches = league.matches
+    stats = {'best_attack': league.best_attack(),
+             'worst_attack': league.worst_attack(),
+             'best_defense': league.best_defense(),
+             'worst_defense': league.worst_defense()}
     return render(request, 'league.html', {'title': league.area+' '+league.name,
                                            'league': league.infos,
     	                                   'table':table,
     	                                   'teams': teams,
-    	                                   'matches': matches})
+    	                                   'matches': matches,
+                                           'stats': stats})
 
 def match(request,league_id,home_team_id,away_team_id):
     league = League(league_id)
