@@ -478,6 +478,34 @@ table td {
     font-size: 1.4rem;
     line-height: 1.3rem;
 }
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    padding-bottom: 2.5rem;
+    justify-content: center;
+}
+.stats div {
+    width: 50%;
+}
+.stats div div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+}
+.stats div h4 {
+    text-transform: uppercase;
+}
+.stats div img {
+    width: 5rem;
+    margin-right: 1rem;
+}
+.stats div span {
+    font-weight: 700;
+    font-size: 30px;
+}
 
 
 

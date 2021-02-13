@@ -11,16 +11,18 @@ from math import *
 from statistics import mean
 
 connection = http.client.HTTPConnection('api.football-data.org')
-headers = { 'X-Auth-Token': 'f236d854a2394189a0b6adbab1302b70' }
 
 def get_league_data(id):
     # Get league data
+    headers = { 'X-Auth-Token': 'f236d854a2394189a0b6adbab1302b70' }
     connection.request('GET', f'/v2/competitions/{id}/teams', None, headers )
     teams = json.loads(connection.getresponse().read().decode())
     # Get league standings
+    headers = { 'X-Auth-Token': 'd4f521c3c53643cf8b4d25b82b5307e7' }
     connection.request('GET', f'/v2/competitions/{id}/standings', None, headers )
     table = json.loads(connection.getresponse().read().decode())
     # Get league matches
+    headers = { 'X-Auth-Token': '1a5f038db98e4ad0af795efc98ad40fa' }
     connection.request('GET', f'/v2/competitions/{id}/matches', None, headers )
     matches = json.loads(connection.getresponse().read().decode())
 
