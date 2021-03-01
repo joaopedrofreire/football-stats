@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- <h1>{{teams.competition.area.name}} <span>{{teams.competition.name}}</span></h1> -->
+    <div class="content" style="max-width: 1200px; margin: auto; flex-wrap: wrap;">
+      <div class="col-6">
+        <div class="card team" style="margin-top: 0">
+          <img src="{{team.crestUrl}}" /><h1>{{team.shortName}}</h1>
+        </div>
+          <div class="card infos" style="width: 100%; text-align: center; display: flex; align-items: center; flex-wrap: wrap; justify-content: center;">
+          <div style="width: 100%; text-align: center; margin-bottom: 1rem;">
+            <h3>{{league.area.name}} {{league.name}}</h3>
+          </div>
+          <div style="width: 50%">
+            <h2 style="text-align: center;"><strong style="font-size: 70px; {% if table.position == 1 %}color: #0F80FF;{% endif %} font-weight: 600">{{table.position}}°</strong><br>colocado</h2>
+          </div>
+          <div style="width: 50%">
+            <h2 style="text-align: center;"><strong style="font-size: 70px;font-weight: 600">{{table.points}}</strong><br>pontos</h2>
+          </div>
+        </div>
+          <div class="card">
+            <h2>GOLS</h2>
+          </div>
+      </div>
+      <div class="col-6">
+          <div class="card" style="margin-top: 0;">
+            <h2>APROVEITAMENTO</h2>
+            {{plot|safe}}
+          </div>
+          <div class="card">
+            <h2>ÚLTIMOS JOGOS</h2>
+          </div>
+      </div>
+    </div>
+    {{results}}
+{% endblock %}

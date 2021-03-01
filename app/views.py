@@ -37,6 +37,7 @@ def match(request,league_id,home_team_id,away_team_id):
             line[i] = n*100
             i+=1
         heatmap.append(line)
+    plots = {'home': match.get_plot('home'), 'away': match.get_plot('away')}
     return render(request, 'match.html', {'title': home_team.infos['shortName']+' x '+away_team.infos['shortName'],
                                           'match': match.infos,
     	                                  'home_team': home_team.infos,
@@ -45,5 +46,18 @@ def match(request,league_id,home_team_id,away_team_id):
     	                                  'attack': attack,
     	                                  'top_results': top_results,
     	                                  'chances': chances,
-                                          'heatmap': heatmap
+                                          'heatmap': heatmap,
+                                          'plots': plots
     	                                  })
+
+def team(request,league_id,team_id):
+    league = League(league_id)
+    team = Team(league,int(team_id))
+    table = team.table(league)
+    plot = team.get_plot(league)
+    return render(request, 'team.html', {'title': team.infos['shortName'],
+                                          'team': team.infos,
+                                          'league': league.infos['competition'],
+                                          'table': table,
+                                          'plot': plot,
+                                           })

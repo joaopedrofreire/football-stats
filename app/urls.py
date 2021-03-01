@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<league_id>', views.league, name='league'),
     path('<league_id>/<home_team_id>/<away_team_id>', views.match, name='match'),
+    path('<league_id>/<team_id>', views.team, name='team'),
 ]

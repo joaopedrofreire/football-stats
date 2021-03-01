@@ -24,7 +24,7 @@
       </thead>
       <tbody>
       {% for item in table %}
-      <tr>
+      <tr onclick="window.location.href = '{{league.competition.id}}/{{item.team_id}}';">
         <td>{{ item.position }}</td>
           {% for team in teams %}
           {% if team.id == item.team_id %}
@@ -59,7 +59,7 @@
     </div>
     </div>
     <div class="col-6">
-      <div class="card" style="margin-top: 0" >
+      <div class="card" style="margin-top: 0">
         <div class="stats">
           <div style="min-width: 15rem; margin-top: 1rem;">
               <h4>Melhor ataque</h4>
@@ -71,21 +71,21 @@
               </div>
           </div>
           <div style="min-width: 15rem; margin-top: 1rem;">
-              <h4>Pior ataque</h4>
-              <div>
-              <img src="{{stats.worst_attack.url}}"/>
-              <div style="display: block; width: 7rem;">{{stats.worst_attack.name}}<br>
-              <span>{{stats.worst_attack.goals}} gols</span><br>
-              marcados</div>
-              </div>
-          </div>
-          <div style="min-width: 15rem; margin-top: 1rem;">
               <h4>Melhor defesa</h4>
               <div>
               <img src="{{stats.best_defense.url}}"/>
               <div style="display: block; width: 7rem;">{{stats.best_defense.name}}<br>
               <span>{{stats.best_defense.goals}} gols</span><br>
               contra</div>
+              </div>
+          </div>
+          <div style="min-width: 15rem; margin-top: 1rem;">
+              <h4>Pior ataque</h4>
+              <div>
+              <img src="{{stats.worst_attack.url}}"/>
+              <div style="display: block; width: 7rem;">{{stats.worst_attack.name}}<br>
+              <span>{{stats.worst_attack.goals}} gols</span><br>
+              marcados</div>
               </div>
           </div>
           <div style="min-width: 15rem; margin-top: 1rem;">

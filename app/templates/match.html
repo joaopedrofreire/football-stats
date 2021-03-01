@@ -51,6 +51,12 @@
             {% endfor %}
           </div>
         </div>
+      <div class="card">
+        <h2>GOLS</h2>
+        {{plots.home|safe}}
+        <div style="height: 7px;"></div>
+        {{plots.away|safe}}
+      </div>
       </div>
       <div class="col-6" style="">
         <div class="card" style="margin-top: 0">
@@ -64,6 +70,11 @@
             <div {% if chances.0 > chances.1 and chances.0 > chances.2 %}style="color: #0F80FF"{% endif %}>Vitória do<br>{{home_team.shortName}}</div>
             <div {% if chances.1 > chances.0 and chances.1 > chances.2 %}style="color: #0F80FF"{% endif %}>Empate</div>
             <div {% if chances.2 > chances.1 and chances.2 > chances.0 %}style="color: #0F80FF"{% endif %}>Vitória do<br>{{away_team.shortName}}</div>
+          </div>
+          <div class="bar">
+            <div style="width: {{chances.0}}%; {% if chances.0 > chances.1 and chances.0 > chances.2 %}background: #0F80FF{% endif %};"></div>
+            <div style="width: {{chances.1}}%; {% if chances.1 > chances.0 and chances.1 > chances.2 %}background: #0F80FF{% endif %};"></div>
+            <div style="width: {{chances.2}}%; {% if chances.2 > chances.1 and chances.2 > chances.0 %}background: #0F80FF{% endif %};"></div>
           </div>
         </div>
         <div class="card heatmap">

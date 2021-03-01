@@ -9,32 +9,48 @@ import plotly.offline as opy
 
 from math import *
 from statistics import mean
+from time import sleep
+
+import dash
+import dash_html_components as html
+import plotly.graph_objects as go
+import plotly.offline as opy
+from plotly.subplots import make_subplots
 
 connection = http.client.HTTPConnection('api.football-data.org')
 
 def get_league_data(id):
-    # Get league data
-    headers = { 'X-Auth-Token': 'f236d854a2394189a0b6adbab1302b70' }
-    connection.request('GET', f'/v2/competitions/{id}/teams', None, headers )
-    teams = json.loads(connection.getresponse().read().decode())
-    # Get league standings
-    headers = { 'X-Auth-Token': 'd4f521c3c53643cf8b4d25b82b5307e7' }
-    connection.request('GET', f'/v2/competitions/{id}/standings', None, headers )
-    table = json.loads(connection.getresponse().read().decode())
-    # Get league matches
-    headers = { 'X-Auth-Token': '1a5f038db98e4ad0af795efc98ad40fa' }
-    connection.request('GET', f'/v2/competitions/{id}/matches', None, headers )
-    matches = json.loads(connection.getresponse().read().decode())
+    while True:
+        try:
+            # Get league data
+            headers = { 'X-Auth-Token': 'f236d854a2394189a0b6adbab1302b70' }
+            connection.request('GET', f'/v2/competitions/{id}/teams', None, headers )
+            teams = json.loads(connection.getresponse().read().decode())
+            # Get league standings
+            headers = { 'X-Auth-Token': 'd4f521c3c53643cf8b4d25b82b5307e7' }
+            connection.request('GET', f'/v2/competitions/{id}/standings', None, headers )
+            table = json.loads(connection.getresponse().read().decode())
+            # Get league matches
+            headers = { 'X-Auth-Token': '1a5f038db98e4ad0af795efc98ad40fa' }
+            connection.request('GET', f'/v2/competitions/{id}/matches', None, headers )
+            matches = json.loads(connection.getresponse().read().decode())
 
-    return {'table': table, 'matches': matches, 'teams': teams}
+            return {'table': table, 'matches': matches, 'teams': teams}
+        except:
+            sleep(1)
 
 class League(object):
     def __init__(self, id):
-        league = get_league_data(id)
-        self.infos = league['teams']
-        self.teams = league['teams']['teams']
-        self.matches = league['matches']['matches']
-        self.table = league['table']['standings']
+        while True:
+            try:
+                league = get_league_data(id)
+                self.infos = league['teams']
+                self.teams = league['teams']['teams']
+                self.matches = league['matches']['matches']
+                self.table = league['table']['standings']
+                break
+            except:
+                sleep(62)
         self.id = id
         self.name = self.infos['competition']['name']
         self.area = self.infos['competition']['area']['name']
@@ -60,6 +76,7 @@ class League(object):
                         'goals_for': team['goalsFor'],
                         'goals_against': team['goalsAgainst'],
                         'goal_difference': team['goalDifference'],
+                        'percentage': round(100*(team['won']*3+team['draw'])/(team['playedGames']*3),1),
                         'form': team['form']})
         df = pd.DataFrame(table[start-1:end], columns=columns)
         return df
@@ -182,24 +199,33 @@ class Match:
             i += 1
         return [home,100-home-away,away]
 
-    def get_heatmap(self):
-        fig = go.Figure(data=go.Heatmap(
-                        z=self.predict_results(),
-                        x=['0', '1', '2', '3', '4'],
-                        y=['0', '1', '2', '3', '4'],
-                        hoverongaps = False,
-                        showscale = False,
-                        colorscale = ['white','#0F80FF']))
-        fig.update_layout(margin=dict(
-                            l=0,
-                            r=0,
-                            b=0,
-                            t=0
-                         ),)
-        fig.update_xaxes(side="top")
-        fig['layout']['yaxis']['autorange'] = "reversed"
-        plot = opy.plot(fig, auto_open=False,
-                             output_type='div')
+    def get_plot(self, team):
+        fig = go.Figure()
+
+        y = self.predict_goals(team, 6)
+        fig.add_trace(go.Scatter(x=[0,1,2,3,4,5], y=y,
+                                 line_shape='spline',
+                                 line=dict(width=4, color="black"),
+                                 marker=dict(size=10, color="#0F80FF"),
+                                 hoverinfo='skip'))
+        fig.update_layout(autosize=True,
+                          height=120,
+                          margin=dict(
+                             l=0,
+                             r=0,
+                             b=0,
+                             t=0,
+                             pad=4),
+                          plot_bgcolor="white",
+                          xaxis=dict(fixedrange=True),
+                          yaxis=dict(fixedrange=True)
+                          )
+        plot = opy.plot(fig,
+                        auto_open=False,
+                        output_type='div',
+                        config=dict(
+                            displayModeBar=False
+                        ))
         return plot
 
 class Team:
@@ -268,3 +294,49 @@ class Team:
                     total_goals.append(int(score))
         return mean(goals)/mean(total_goals)
 
+    def table(self, league):
+        table = league.get_table()
+        team_table = table[table['name'] == self.infos['name']]
+        return team_table.to_dict(orient='records')[0]
+
+    def get_plot(self, league):
+        table = self.table(league)
+        data = [int(table['won']),int(table['draw']),int(table['lost'])]
+        fig = go.Figure()
+        fig.add_trace(go.Pie(labels=['Vitórias','Empates','Derrotas'],
+                             values=data, 
+                             title=dict(
+                                text=str(float(table['percentage']))+'%',
+                                font=dict(size=50, color='black')),
+                             textinfo="none",
+                             hole=.9,
+                             marker=dict(colors=['#1ACF6C','#0F80FF','#FC2E37']),
+                             hoverinfo='value'))
+
+        fig.update_layout(autosize=True,
+                          height=300,
+                          margin=dict(
+                             l=0,
+                             r=0,
+                             b=0,
+                             t=0,
+                             pad=4
+                          ),
+                          legend=dict(
+                          orientation="h",
+                          xanchor='center',
+                          x=0.5,
+                          font=dict(size=16)),
+                          hoverlabel=dict(bgcolor='white',
+                                       font_size=20),)
+
+        plot = opy.plot(fig,
+                        auto_open=False,
+                        output_type='div',
+                        config=dict(
+                            displayModeBar=False
+                        ))
+
+        return plot
+
+        # def lastest_matches(self, league):
