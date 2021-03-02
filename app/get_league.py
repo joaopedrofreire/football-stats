@@ -339,4 +339,16 @@ class Team:
 
         return plot
 
-        # def lastest_matches(self, league):
+    def lastest_matches(self, league):
+        matches = []
+        for match in league.matches:
+            if match['awayTeam']['id']==int(self.team_id) and match['status']=='FINISHED':
+                url = Team(league,match['homeTeam']['id']).infos['crestUrl']
+                match.update({'local':'away', 'url': url})
+                matches.append(match)
+            if match['homeTeam']['id']==int(self.team_id) and match['status']=='FINISHED':
+                url = Team(league,match['awayTeam']['id']).infos['crestUrl']
+                match.update({'local':'home', 'url': url})
+                matches.append(match)
+        return matches[-5:]
+

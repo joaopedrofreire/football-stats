@@ -55,8 +55,28 @@
             <h2>APROVEITAMENTO</h2>
             {{plot|safe}}
           </div>
-          <div class="card" style="height: 20rem;">
+          <div class="card" style="height: 18.5rem;">
             <h2>ÚLTIMOS JOGOS</h2>
+            <div style="display: flex;">
+              {% for match in matches %}
+              <div class="match">
+                <img src="{{match.url}}" />
+                <div style="font-size: 17px; font-weight: 300">{{match.utcDate|slice:"8:10"}}/{{match.utcDate|slice:"5:7"}}</div>
+                <div style="width: 100%">{{match.score.fullTime.homeTeam}} X {{match.score.fullTime.awayTeam}}</div>
+                {% if match.local == 'home' and match.score.winner == 'HOME_TEAM' %}
+                <div class="ball" style="background: #00B732">V</div>
+                {% elif match.local == 'home' and match.score.winner == 'AWAY_TEAM' %}
+                <div class="ball" style="background: #FC0107">D</div>
+                {% elif match.local == 'away' and match.score.winner == 'AWAY_TEAM' %}
+                <div class="ball" style="background: #00B732">V</div>
+                {% elif match.local == 'away' and match.score.winner == 'HOME_TEAM' %}
+                <div class="ball" style="background: #FC0107">D</div>
+                {% else %}
+                <div class="ball" style="background: #0F80FF">E</div>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
           </div>
       </div>
     </div>

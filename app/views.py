@@ -55,9 +55,11 @@ def team(request,league_id,team_id):
     team = Team(league,int(team_id))
     table = team.table(league)
     plot = team.get_plot(league)
+    matches = team.lastest_matches(league)
     return render(request, 'team.html', {'title': team.infos['shortName'],
                                           'team': team.infos,
                                           'league': league.infos['competition'],
                                           'table': table,
                                           'plot': plot,
+                                          'matches': matches,
                                            })
