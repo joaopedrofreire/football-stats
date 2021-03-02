@@ -202,7 +202,7 @@ class Match:
     def get_plot(self, team):
         fig = go.Figure()
 
-        y = self.predict_goals(team, 6)
+        y = np.array(self.predict_goals(team, 6)) * 100
         fig.add_trace(go.Scatter(x=[0,1,2,3,4,5], y=y,
                                  line_shape='spline',
                                  line=dict(width=4, color="black"),
@@ -310,7 +310,7 @@ class Team:
                                 font=dict(size=50, color='black')),
                              textinfo="none",
                              hole=.9,
-                             marker=dict(colors=['#1ACF6C','#0F80FF','#FC2E37']),
+                             marker=dict(colors=['#00B732','#0F80FF','#FC0107']),
                              hoverinfo='value'))
 
         fig.update_layout(autosize=True,

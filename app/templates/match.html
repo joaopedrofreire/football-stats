@@ -51,15 +51,22 @@
             {% endfor %}
           </div>
         </div>
-      <div class="card">
-        <h2>GOLS</h2>
+      <div class="card" style="position: relative;">
+        <h2 style="margin: 0">GOLS</h2>
+          <h3 style="margin-top: 0">CHANCES DE GOLS DOS TIMES (%)</h3>
         {{plots.home|safe}}
-        <div style="height: 7px;"></div>
+        <div style="height: 10px;"></div>
         {{plots.away|safe}}
+        <div class="badge1">
+          <img src="{{home_team.crestUrl}}">
+        </div>
+        <div class="badge2">
+          <img src="{{away_team.crestUrl}}">
+        </div>
       </div>
       </div>
       <div class="col-6" style="">
-        <div class="card" style="margin-top: 0">
+        <div class="card" style="margin-top: 0; padding-bottom: 3rem;">
           <h2>CHANCES</h2>
           <div class="prob">
             <div {% if chances.0 > chances.1 and chances.0 > chances.2 %}style="color: #0F80FF"{% endif %}>{{chances.0}}%</div>

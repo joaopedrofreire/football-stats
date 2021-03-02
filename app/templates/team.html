@@ -20,6 +20,34 @@
         </div>
           <div class="card">
             <h2>GOLS</h2>
+            <div style="display: flex; justify-content: space-between;">
+              <div>
+                <span style="color: #0F80FF; font-size: 25px;">{{table.goals_for}} <span style="font-size: 20px;">gols marcados</span></span>
+              </div>
+              <div>
+                <span style="color: #FC0107; font-size: 25px; {% if table.goals_for >= table.goals_against %}display: none;{% endif %}"><span style="font-size: 20px;">saldo de gols</span> {{table.goal_difference}}</span>
+              </div>
+            </div>
+            <div class="goals">
+              <div style="{% if table.goals_for >= table.goals_against %}width: 100%;{% else %}width: calc({{table.goals_for}}00% / {{table.goals_against}}); padding-right: 0.5rem;{% endif %} text-align: left;">
+                <div class="goals_bar" style=" background: #0F80FF;"></div>
+              </div>
+              <div style="{% if table.goals_for >= table.goals_against %}display: none;{% else %} width: calc(({{table.goals_against}}00% - {{table.goals_for}}00%) / {{table.goals_against}}); padding-left: 0.5rem;{% endif %} text-align: right;">
+                <div class="goals_bar" style=" background: #FC0107;"></div>
+              </div>
+            </div>
+            <div class="goals">
+              <div style="{% if table.goals_for <= table.goals_against %}width: 100%;{% else %}width: calc({{table.goals_against}}00% / {{table.goals_for}}); padding-right: 0.5rem;{% endif %} text-align: left;">
+                <div class="goals_bar" style=" background: #333;"></div>
+              </div>
+              <div style="{% if table.goals_for <= table.goals_against %}display: none;{% else %} width: calc(({{table.goals_for}}00% - {{table.goals_against}}00%) / {{table.goals_for}}); padding-left: 0.5rem;{% endif %} text-align: right;">
+                <div class="goals_bar" style=" background: #00B732;"></div>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span style="color: #333; font-size: 25px;">{{table.goals_against}} <span style="font-size: 20px;">gols contra</span></span>
+                <span style="color: #00B732; font-size: 25px; {% if table.goals_for <= table.goals_against %}display: none;{% endif %}"><span style="font-size: 20px;">saldo de gols</span> {{table.goal_difference}}</span>
+            </div>
           </div>
       </div>
       <div class="col-6">
@@ -27,7 +55,7 @@
             <h2>APROVEITAMENTO</h2>
             {{plot|safe}}
           </div>
-          <div class="card">
+          <div class="card" style="height: 20rem;">
             <h2>ÚLTIMOS JOGOS</h2>
           </div>
       </div>
